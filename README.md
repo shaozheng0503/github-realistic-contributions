@@ -4,6 +4,8 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/shaozheng0503/github-realistic-contributions.svg)](https://github.com/shaozheng0503/github-realistic-contributions)
 [![GitHub forks](https://img.shields.io/github/forks/shaozheng0503/github-realistic-contributions.svg)](https://github.com/shaozheng0503/github-realistic-contributions)
+[![GitHub issues](https://img.shields.io/github/issues/shaozheng0503/github-realistic-contributions.svg)](https://github.com/shaozheng0503/github-realistic-contributions/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/shaozheng0503/github-realistic-contributions.svg)](https://github.com/shaozheng0503/github-realistic-contributions/pulls)
 
 > 🎯 **基于 [@Shpota/github-activity-generator](https://github.com/Shpota/github-activity-generator) 灵感开发**  
 > 🚀 **完全中文化 + 真实贡献模式 + 智能中断算法**
@@ -232,6 +234,24 @@ flake8 contribute.py
 
 # 类型检查
 mypy contribute.py
+```
+
+### 使用 Makefile
+```bash
+# 查看所有可用命令
+make help
+
+# 运行测试
+make test
+
+# 代码检查
+make lint
+
+# 代码格式化
+make format
+
+# 安装项目
+make install
 ```
 
 ## 📈 贡献指南
