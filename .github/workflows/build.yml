@@ -1,0 +1,50 @@
+name: 构建和测试
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        
+      - name: 设置 Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest pytest-cov
+          
+      - name: 代码风格检查
+        run: |
+          flake8 contribute.py --max-line-length=120 --ignore=E501,W503
+          flake8 test_contribute.py --max-line-length=120 --ignore=E501,W503
+          
+      - name: 运行测试
+        run: |
+          python -m pytest test_contribute.py -v --cov=contribute --cov-report=term-missing
+          
+      - name: 测试贡献生成器
+        run: |
+          python -m unittest test_contribute
+          
+      - name: 验证脚本语法
+        run: |
+          python -m py_compile contribute.py
+          python -m py_compile test_contribute.py
+          
+      - name: 检查中文编码
+        run: |
+          python -c "
+          import sys
+          sys.path.append('.')
+          import contribute
+          print('✅ 中文编码检查通过')
+          "
